@@ -1,8 +1,16 @@
 export class TaskList {
-    constructor(category, tasks) {
-        this.category = category;
-        this.tasks = tasks;
+    constructor(appElement) {
+        this.init(appElement);
     }
 
-    render() {}
+    init(appElement) {
+        this.createTaskList(appElement);
+    }
+
+    createTaskList(appElement) {
+        this.taskListElement = document.createElement('div');
+        this.taskListElement.classList.add('task-list');
+        appElement.append(this.taskListElement);
+    }
+
 }

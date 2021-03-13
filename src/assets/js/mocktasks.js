@@ -1,4 +1,4 @@
-export const tasks = [
+export let tasks = [
     {id: '2', title: 'Wash hands', status: '0', category: '1'},
     {id: '3', title: 'Wash hands', status: '0', category: '2'},
     {id: '4', title: 'Wash hands', status: '0', category: '0'},
@@ -15,4 +15,4 @@ export const tasks = [
     {id: '14', title: 'Wash hands', status: '0', category: '1'},
     {id: '15', title: 'Wash hands', status: '0', category: '1'},
     {id: '16', title: 'Wash hands', status: '0', category: '1'},
-];
+]

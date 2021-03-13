@@ -1,7 +1,18 @@
 $font-size: 1rem;
-$font-color: blue;
+
 
 html {
-    font-size: $font-size;
-    color: $font-color;
+    font-size: 20px;
+}
+
+.app-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.task-list {
+    display: flex;
+    justify-content: space-around;
 }
