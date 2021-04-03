@@ -24,7 +24,7 @@ export class ToDoListApp {
 
         this.renderTasksBoxes();
 
-        this.addTaskForm.taskSubmit.addEventListener ('click', () => {
+        this.addTaskForm.taskSubmit.addEventListener('click', () => {
             this.addTask(this.addTaskForm.taskInput.value, this.addTaskForm.categorySelection.value);
         });
     }
@@ -65,18 +65,26 @@ export class ToDoListApp {
         this.tasksBoxes.forEach(taskBox => {
             let currentTaskList = this.taskList.filter(task => task.category === taskBox.category);
             currentTaskList.forEach(task => {
-                this.tasks = [...this.tasks, new Task(task.id, task.title, task.category, task.status, taskBox.listElement)];
+                this.tasks = [...this.tasks, new Task(task.id, task.title, task.category, task.status, taskBox.listElement, this.deleteTask)];
             });
         });
     }
 
     addTask(task, category) {
-        if(task.length < 5) {
+        if (task.length < 5) {
             alert(`Enter minimum 5 symbols`);
         } else {
-            let newId = new Date + Math.round(100 * Math.random);
-            this.tasks = [...this.tasks, new Task(newId, task, 0, category, this.tasksBoxes[category].listElement)];
+            let newId = Date.now() + Math.round(100 * Math.random());
+            console.log(newId);
+            this.tasks = [...this.tasks, new Task(newId, task, 0, category, this.tasksBoxes[category].listElement, this.deleteTask.bind(this))];
         }
         this.addTaskForm.taskInput.value = '';
+    }
+
+    deleteTask(e, taskId, domElement ) {
+        e.preventDefault();
+        domElement.remove();
+        // this.tasks = this.tasks.filter(task => task.id === taskId);
+        console.log(this);
     }
 }
