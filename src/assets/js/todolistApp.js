@@ -4,6 +4,7 @@ import { tasksCategories } from './taskscategories';
 import { AddTaskForm } from './addtaskform';
 import { TaskList } from './tasklist';
 import { TaskBox } from './taskbox';
+import { Task } from './task';
 
 
 export class ToDoListApp {
@@ -22,6 +23,10 @@ export class ToDoListApp {
         this.createTasksBoxes(this.tasksCategories);
 
         this.renderTasksBoxes();
+
+        this.addTaskForm.taskSubmit.addEventListener ('click', () => {
+            this.addTask(this.addTaskForm.taskInput.value);
+        });
     }
 
     init(targetElement) {
@@ -57,33 +62,20 @@ export class ToDoListApp {
     }
 
     renderTasksBoxes() {
-        this.tasksBoxes.forEach(
-            taskBox => {
-                this.createTasks(this.taskList);
-                this.renderTasks(taskBox.category,taskBox.listElement);
-            }
-        )
-    }
-
-    createTasks(taskList) {
-        console.log(taskList);
-        taskList.forEach(task => {
-            // console.log(task.id, task.category, task.title);
-            if (task.category === taskList.id) console.log(`Task category is ${task.category} and task is ${task.title}`);
+        this.tasksBoxes.forEach(taskBox => {
+            let currentTaskList = this.taskList.filter(task => task.category === taskBox.category);
+            currentTaskList.forEach(task => {
+                this.tasks = [...this.tasks, new Task(task.id, task.title, task.category, task.status, taskBox.listElement)];
+            });
         });
     }
 
-    renderTasks(category, parentUl) {
-        let tasks = this.taskList.filter(task => task.category === category);
-        tasks.forEach(task => {
-            this.taskElement = document.createElement('li');
-            this.taskElement.innerHTML = `${task.title}`;
-            parentUl.append(this.taskElement);
-        });
-
-        // console.log(`Category: ${category}`);
-        // tasks.forEach(task => {
-        //     console.log(task);
-        // });
+    addTask(task) {
+        if(task.length < 5) {
+            alert(`Enter minimum 5 symbols`);
+        } else {
+            let newId = new Date + Math.round(100 * Math.random);
+            this.tasks = [...this.tasks, new Task(newId, task, 0, 0, this.tasksBoxes[0].listElement)];
+        }
     }
 }
