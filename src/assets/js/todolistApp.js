@@ -18,6 +18,7 @@ export class ToDoListApp {
         this.taskListElement = new TaskList(parentElement);
 
         this.renderCategories();
+
         this.createTasksBoxes(this.tasksCategories);
 
         this.renderTasksBoxes();
@@ -58,20 +59,31 @@ export class ToDoListApp {
     renderTasksBoxes() {
         this.tasksBoxes.forEach(
             taskBox => {
-                this.renderTasks(taskBox.category);
+                this.createTasks(this.taskList);
+                this.renderTasks(taskBox.category,taskBox.listElement);
             }
         )
     }
 
     createTasks(taskList) {
-        // taskList.forEach/
+        console.log(taskList);
+        taskList.forEach(task => {
+            // console.log(task.id, task.category, task.title);
+            if (task.category === taskList.id) console.log(`Task category is ${task.category} and task is ${task.title}`);
+        });
     }
 
-    renderTasks(category) {
+    renderTasks(category, parentUl) {
         let tasks = this.taskList.filter(task => task.category === category);
-        console.log(`Category: ${category}`);
         tasks.forEach(task => {
-            console.log(task);
+            this.taskElement = document.createElement('li');
+            this.taskElement.innerHTML = `${task.title}`;
+            parentUl.append(this.taskElement);
         });
+
+        // console.log(`Category: ${category}`);
+        // tasks.forEach(task => {
+        //     console.log(task);
+        // });
     }
 }
