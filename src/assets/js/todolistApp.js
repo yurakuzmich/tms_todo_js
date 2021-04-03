@@ -15,7 +15,7 @@ export class ToDoListApp {
         this.tasks = [];
         this.init(this.parentElement);
 
-        this.addTaskForm = new AddTaskForm(parentElement);
+        this.addTaskForm = new AddTaskForm(parentElement, this.tasksCategories);
         this.taskListElement = new TaskList(parentElement);
 
         this.renderCategories();
@@ -25,7 +25,7 @@ export class ToDoListApp {
         this.renderTasksBoxes();
 
         this.addTaskForm.taskSubmit.addEventListener ('click', () => {
-            this.addTask(this.addTaskForm.taskInput.value);
+            this.addTask(this.addTaskForm.taskInput.value, this.addTaskForm.categorySelection.value);
         });
     }
 
@@ -70,12 +70,13 @@ export class ToDoListApp {
         });
     }
 
-    addTask(task) {
+    addTask(task, category) {
         if(task.length < 5) {
             alert(`Enter minimum 5 symbols`);
         } else {
             let newId = new Date + Math.round(100 * Math.random);
-            this.tasks = [...this.tasks, new Task(newId, task, 0, 0, this.tasksBoxes[0].listElement)];
+            this.tasks = [...this.tasks, new Task(newId, task, 0, category, this.tasksBoxes[category].listElement)];
         }
+        this.addTaskForm.taskInput.value = '';
     }
 }

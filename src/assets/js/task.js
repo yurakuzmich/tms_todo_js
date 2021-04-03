@@ -13,7 +13,7 @@ export class Task {
         this.taskElement = document.createElement('li');
         this.taskElement.style.display = 'flex';
         this.taskElement.style.justifyContent = 'space-between';
-        this.taskElement.innerHTML = `<div>${this.title}</div><div>edit</div><div>delete</div>`;
+        this.taskElement.innerHTML = `<div>${this.title}</div><div><a href="">edit</a></div><div><a href="">X</a></div>`;
         parentElement.append(this.taskElement);
     }
 }
