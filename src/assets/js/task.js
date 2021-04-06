@@ -1,11 +1,10 @@
 export class Task {
-    constructor(id, title, category, status, parentElement, deleteMethod) {
+    constructor(id, title, category, status, parentElement) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.status = status;
         this.parentElement = parentElement;
-        this.deleteMethod = deleteMethod;
 
         this.init(this.parentElement);
     }
@@ -15,19 +14,17 @@ export class Task {
         this.taskElement.style.display = 'flex';
         this.taskElement.style.justifyContent = 'space-between';
         this.taskElement.textContent = `${this.title}`;
+        
+        this.editTaskElement = document.createElement('a');
+        this.editTaskElement.href = '';
+        this.editTaskElement.textContent = '[E]';
+        this.taskElement.append(this.editTaskElement);
 
         this.deleteTaskElement = document.createElement('a');
         this.deleteTaskElement.href = '';
         this.deleteTaskElement.textContent = '[X]';
-        this.deleteTaskElement.onclick = (e) => this.deleteMethod(e, this.id, this.taskElement);
         this.taskElement.append(this.deleteTaskElement);
 
         parentElement.append(this.taskElement);
     }
-
-    // removeTask(event, el) {
-    //     event.preventDefault();
-    //     el.remove();
-    //     this.deleted = true;
-    // }
 }

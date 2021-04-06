@@ -24,8 +24,18 @@ export class ToDoListApp {
 
         this.renderTasksBoxes();
 
-        this.addTaskForm.taskSubmit.addEventListener('click', () => {
-            this.addTask(this.addTaskForm.taskInput.value, this.addTaskForm.categorySelection.value);
+        document.addEventListener('click', (e) => {
+            if(e.target === this.addTaskForm.taskSubmit) {
+                this.addTask(this.addTaskForm.taskInput.value, this.addTaskForm.categorySelection.value);
+            }
+
+            this.tasks.forEach((task) => {
+                if(e.target === task.deleteTaskElement) {
+                    e.preventDefault();
+                    console.log(`Cross clicked`);
+                    task.taskElement.remove();
+                }
+            });
         });
     }
 
@@ -75,8 +85,7 @@ export class ToDoListApp {
             alert(`Enter minimum 5 symbols`);
         } else {
             let newId = Date.now() + Math.round(100 * Math.random());
-            console.log(newId);
-            this.tasks = [...this.tasks, new Task(newId, task, 0, category, this.tasksBoxes[category].listElement, this.deleteTask.bind(this))];
+            this.tasks = [...this.tasks, new Task(newId, task, 0, category, this.tasksBoxes[category].listElement)];
         }
         this.addTaskForm.taskInput.value = '';
     }
@@ -84,7 +93,10 @@ export class ToDoListApp {
     deleteTask(e, taskId, domElement ) {
         e.preventDefault();
         domElement.remove();
-        // this.tasks = this.tasks.filter(task => task.id === taskId);
         console.log(this);
+    }
+
+    updateLocalStorage() {
+            localStorage.setItem('tasks', this.tasks);
     }
 }
