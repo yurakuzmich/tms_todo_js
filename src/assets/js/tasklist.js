@@ -9,7 +9,7 @@ export class TaskList {
 
     createTaskList(appElement) {
         this.taskListElement = document.createElement('div');
-        this.taskListElement.classList.add('task-list');
+        this.taskListElement.classList.add('task-list', 'row');
         appElement.append(this.taskListElement);
     }
 

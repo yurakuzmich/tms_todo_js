@@ -12,12 +12,21 @@ export class Task {
     init(parentElement) {
         this.taskElement = document.createElement('li');
         this.taskElement.style.display = 'flex';
+        this.taskElement.style.alignItems = 'center';
         this.taskElement.style.justifyContent = 'space-between';
-        this.taskElement.textContent = `${this.title}`;
+
+        this.checkBoxTaskElement = document.createElement('input');
+        this.checkBoxTaskElement.type = 'checkbox';
+        this.checkBoxTaskElement.style.display = 'block';
+        this.taskElement.append(this.checkBoxTaskElement);
+
+        this.textElement = document.createElement('p');
+        this.textElement.textContent = `${this.title}`;
+        this.taskElement.append(this.textElement);
         
         this.editTaskElement = document.createElement('a');
         this.editTaskElement.href = '';
-        this.editTaskElement.textContent = '[E]';
+        this.editTaskElement.textContent = '[Edit]';
         this.taskElement.append(this.editTaskElement);
 
         this.deleteTaskElement = document.createElement('a');

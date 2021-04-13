@@ -1,5 +1,10 @@
 $font-size: 1rem;
 
+* {
+    font-family: 'Open Sans', sans-serif;
+    word-break: all;
+}
+
 
 html {
     font-size: 20px;
@@ -12,7 +17,114 @@ html {
     justify-content: flex-start;
 }
 
+.task-form {
+    position: absolute;
+    bottom: -50px;
+    right: -30px;
+
+    & input, select, button  {
+        padding: 10px;
+        margin: 0 10px;
+    }
+
+    & button {
+        border: none;
+        box-shadow: 5px -2px #82c962;
+        outline: none;
+        background-color: #226403;
+        color: #ffffff;
+        cursor: pointer;
+    }
+}
+
 .task-list {
-    display: flex;
-    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.task-box {
+    
+    &_urgent {
+
+        border-color: #ff0000;
+        background-color: #ff6a85;
+        box-shadow: -5px -2px #ff0000;
+
+        & h2 {
+            padding: 3px;
+            text-align: center;
+            color:rgb(255, 255, 255);
+            background-color: #ff0000;
+        }
+
+        & a {
+            display: block;
+            margin: 0 3px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        & u {
+            width: 100%;
+            & li {
+                width: 100%;
+            }
+        }
+    }
+
+    &_important {
+
+        border-color: #ff7b00;
+        background-color: #fdb35e;
+        box-shadow: 0 -2px #ff7b00;
+
+        & h2 {
+            padding: 3px;
+            text-align: center;
+            color:#ffffff;
+            background-color: #ff7b00;
+        }
+
+        & a {
+            display: block;
+            margin: 0 3px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        & u {
+            width: 100%;
+            & li {
+                width: 100%;
+            }
+        }
+    }
+
+    &_not-important {
+
+        border-color: #226403;
+        background-color: #82c962;
+        box-shadow: 5px -2px #226403;
+
+        & h2 {
+            padding: 3px;
+            text-align: center;
+            color:#ffffff;
+            background-color: #226403;
+        }
+
+        & a {
+            display: block;
+            margin: 0 3px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        & u {
+            width: 100%;
+            & li {
+                width: 100%;
+            }
+        }
+    }
+    
 }

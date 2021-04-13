@@ -1,23 +1,26 @@
 export class AddTaskForm {
     constructor(appElement, tasksCategories) {
-        this.init(appElement, tasksCategories);
-        console.log(tasksCategories);
+        this.formElement = document.createElement('div');
+        this.formElement.classList.add('task-form');
+
+        this.init(appElement, this.formElement, tasksCategories);
     }
 
-    init(appElement, tasksCategories) {
-        this.createInput(appElement);
-        this.createCategorySelection(appElement, tasksCategories);
-        this.createSubmitButton(appElement);
+    init(appElement, formElement, tasksCategories) {
+        this.createInput(formElement);
+        this.createCategorySelection(formElement, tasksCategories);
+        this.createSubmitButton(formElement);
+        this.appendFormToApp(appElement);
     }
 
-    createInput(appElement) {
+    createInput(formElement) {
         this.taskInput = document.createElement('input');
         this.taskInput.type = 'text';
         this.taskInput.placeholder = "add task";
-        appElement.append(this.taskInput);
+        formElement.append(this.taskInput);
     }
 
-    createCategorySelection(appElement, tasksCategories) {
+    createCategorySelection(formElement, tasksCategories) {
         this.categorySelection = document.createElement('select');
         let optionElements = tasksCategories.map(category => {
             let option = document.createElement('option');
@@ -30,13 +33,17 @@ export class AddTaskForm {
             this.categorySelection.append(option);
         });
 
-        appElement.append(this.categorySelection);
+        formElement.append(this.categorySelection);
     }
 
-    createSubmitButton(appElement) {
+    createSubmitButton(formElement) {
         this.taskSubmit = document.createElement('button');
-        this.taskSubmit.type = 'submit';
-        this.taskSubmit.textContent = 'add task';
-        appElement.append(this.taskSubmit);
+        this.taskSubmit.type = 'buton';
+        this.taskSubmit.textContent = 'Add task';
+        formElement.append(this.taskSubmit);
+    }
+
+    appendFormToApp(appElement) {
+        appElement.append(this.formElement);
     }
 }
